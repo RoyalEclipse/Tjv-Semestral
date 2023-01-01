@@ -1,42 +1,18 @@
-package com.semestral.eshop.domain;
+package com.semestral.eshop.domain.dto;
 
-import javax.persistence.*;
+import com.semestral.eshop.domain.SiteOrder;
+
 import java.util.List;
 
-@Entity
-public class SiteUser {
-    @Id
-    @GeneratedValue
+public class SiteUserDto {
     private Long id;
-
-    @Column(nullable=false)
     private String name;
-    @Column(nullable=false)
     private String surname;
-    @Column(nullable=false)
     private String email;
-    @Column(nullable=false)
     private String phoneNumber;
-    @Column(nullable=false)
     private int accessPrivileges;
-    @Column(nullable=false)
     private long credits;
-
-    @OneToMany(mappedBy = "fromSiteUser")
     private List<SiteOrder> SiteOrders;
-
-    public SiteUser() {
-    }
-
-    public SiteUser(String name, String surname, String email, String phoneNumber, int accessPrivileges, long credits, List<SiteOrder> SiteOrders) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.accessPrivileges = accessPrivileges;
-        this.credits = credits;
-        this.SiteOrders = SiteOrders;
-    }
 
     public Long getId() {
         return id;
@@ -94,11 +70,11 @@ public class SiteUser {
         this.credits = credits;
     }
 
-    public List<SiteOrder> getOrders() {
+    public List<SiteOrder> getSiteOrders() {
         return SiteOrders;
     }
 
-    public void setOrders(List<SiteOrder> SiteOrders) {
-        this.SiteOrders = SiteOrders;
+    public void setSiteOrders(List<SiteOrder> siteOrders) {
+        SiteOrders = siteOrders;
     }
 }

@@ -1,14 +1,14 @@
 package com.semestral.eshop.service;
 
-import com.semestral.eshop.domain.Order;
+import com.semestral.eshop.domain.SiteOrder;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
-    Order create(Order toAdd);
-    Order update(Order toUpdate);
+    SiteOrder create(SiteOrder toAdd);
+    SiteOrder update(SiteOrder toUpdate);
     void delete(Long toDelete);
-    Optional<Order> findById(Long toFind );
-    List<Order> findAll();
+    Optional<SiteOrder> findById(Long toFind );
+    List<SiteOrder> findAll();
 }

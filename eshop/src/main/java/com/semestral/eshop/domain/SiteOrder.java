@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class Order {
+public class SiteOrder {
     @Id
     @GeneratedValue
     private Long id;
@@ -18,13 +18,13 @@ public class Order {
     @ManyToOne
     private SiteUser fromSiteUser;
 
-    @OneToMany(mappedBy = "fromOrder")
+    @OneToMany(mappedBy = "fromSiteOrder")
     private List<Product> Products;
 
-    public Order() {
+    public SiteOrder() {
     }
 
-    public Order(String dateCreated, String deliverTo, int eta, SiteUser fromSiteUser, List<Product> Products) {
+    public SiteOrder(String dateCreated, String deliverTo, int eta, SiteUser fromSiteUser, List<Product> Products) {
         this.dateCreated = dateCreated;
         this.deliverTo = deliverTo;
         this.eta = eta;

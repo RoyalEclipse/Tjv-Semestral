@@ -1,6 +1,6 @@
 package com.semestral.eshop.service;
 
-import com.semestral.eshop.domain.Order;
+import com.semestral.eshop.domain.SiteOrder;
 import com.semestral.eshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +16,12 @@ public class OrderServiceImpl implements OrderService{
         this.orderRepository = orderRepository;
     }
     @Override
-    public Order create(Order toAdd) {
+    public SiteOrder create(SiteOrder toAdd) {
         return orderRepository.save(toAdd);
     }
 
     @Override
-    public Order update(Order toUpdate) {
+    public SiteOrder update(SiteOrder toUpdate) {
         return orderRepository.save(toUpdate);
     }
 
@@ -31,12 +31,12 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Optional<Order> findById(Long toFind) {
+    public Optional<SiteOrder> findById(Long toFind) {
         return orderRepository.findById(toFind);
     }
 
     @Override
-    public List<Order> findAll() {
+    public List<SiteOrder> findAll() {
         return orderRepository.findAll();
     }
 }

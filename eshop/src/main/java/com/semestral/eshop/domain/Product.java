@@ -19,7 +19,7 @@ public class Product {
     private int price;
     @ManyToOne
 //    @JoinColumn(name="order_id")
-    private Order fromOrder;
+    private SiteOrder fromSiteOrder;
 
     @ManyToMany
     private Set<Warehouse> availableAt;
@@ -27,12 +27,12 @@ public class Product {
     public Product() {
     }
 
-    public Order getFromOrder() {
-        return fromOrder;
+    public SiteOrder getFromOrder() {
+        return fromSiteOrder;
     }
 
-    public void setFromOrder(Order fromOrder) {
-        this.fromOrder = fromOrder;
+    public void setFromOrder(SiteOrder fromSiteOrder) {
+        this.fromSiteOrder = fromSiteOrder;
     }
 
     public Set<Warehouse> getAvailableAt() {
@@ -43,12 +43,12 @@ public class Product {
         this.availableAt = availableAt;
     }
 
-    public Product(String name, String description, String imageUrl, int price, Order fromOrder, Set<Warehouse> availableAt) {
+    public Product(String name, String description, String imageUrl, int price, SiteOrder fromSiteOrder, Set<Warehouse> availableAt) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
         this.price = price;
-        this.fromOrder = fromOrder;
+        this.fromSiteOrder = fromSiteOrder;
         this.availableAt = availableAt;
     }
 
