@@ -5,31 +5,33 @@ import com.semestral.eshop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class OrderServiceImpl implements OrderService{
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
     @Override
     public Order create(Order toAdd) {
-        return null;
+        return orderRepository.save(toAdd);
     }
 
     @Override
     public Order update(Order toUpdate) {
-        return null;
+        return orderRepository.save(toUpdate);
     }
 
     @Override
-    public Order delete(Order toDelete) {
-        return null;
+    public void delete(Long toDelete) {
+        orderRepository.deleteById(toDelete);
     }
 
     @Override
-    public Order findById(Long toFind) {
-        return null;
+    public Optional<Order> findById(Long toFind) {
+        return orderRepository.findById(toFind);
     }
 
 }

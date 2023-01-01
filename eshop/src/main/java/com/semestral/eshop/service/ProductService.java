@@ -2,9 +2,11 @@ package com.semestral.eshop.service;
 
 import com.semestral.eshop.domain.Product;
 
+import java.util.Optional;
+
 public interface ProductService {
         Product create(Product toAdd);
         Product update(Product toUpdate);
-        Product delete(Product toDelete);
-        Product findById(Long toFind );
+        void delete(Long toDelete);
+        Optional<Product> findById(Long toFind );
 }

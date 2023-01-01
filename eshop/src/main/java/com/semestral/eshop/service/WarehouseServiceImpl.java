@@ -5,10 +5,12 @@ import com.semestral.eshop.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class WarehouseServiceImpl implements WarehouseService{
 
-    private WarehouseRepository warehouseRepository;
+    private final WarehouseRepository warehouseRepository;
     @Autowired
     public WarehouseServiceImpl(WarehouseRepository warehouseRepository) {
         this.warehouseRepository = warehouseRepository;
@@ -16,21 +18,21 @@ public class WarehouseServiceImpl implements WarehouseService{
 
     @Override
     public Warehouse create(Warehouse toAdd) {
-        return null;
+        return warehouseRepository.save(toAdd);
     }
 
     @Override
     public Warehouse update(Warehouse toUpdate) {
-        return null;
+        return warehouseRepository.save(toUpdate);
     }
 
     @Override
-    public Warehouse delete(Warehouse toDelete) {
-        return null;
+    public void delete (Long toDelete) {
+        warehouseRepository.deleteById(toDelete);
     }
 
     @Override
-    public Warehouse findById(Long toFind) {
-        return null;
+    public Optional<Warehouse> findById(Long toFind) {
+        return warehouseRepository.findById(toFind);
     }
 }

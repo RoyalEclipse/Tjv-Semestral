@@ -5,6 +5,8 @@ import com.semestral.eshop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
@@ -15,21 +17,21 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product create(Product toAdd) {
-        return null;
+        return productRepository.save(toAdd);
     }
 
     @Override
     public Product update(Product toUpdate) {
-        return null;
+        return productRepository.save(toUpdate);
     }
 
     @Override
-    public Product delete(Product toDelete) {
-        return null;
+    public void delete(Long toDelete) {
+        productRepository.deleteById(toDelete);
     }
 
     @Override
-    public Product findById(Long toFind) {
-        return null;
+    public Optional<Product> findById(Long toFind) {
+        return productRepository.findById(toFind);
     }
 }

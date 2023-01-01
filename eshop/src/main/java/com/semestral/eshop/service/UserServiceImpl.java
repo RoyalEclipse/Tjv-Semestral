@@ -5,10 +5,12 @@ import com.semestral.eshop.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -17,21 +19,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public SiteUser create(SiteUser toAdd) {
-        return (SiteUser) userRepository.save(toAdd);
+        return userRepository.save( toAdd );
     }
 
     @Override
     public SiteUser update(SiteUser toUpdate) {
-        return null;
+        return userRepository.save(toUpdate);
     }
 
     @Override
-    public SiteUser delete(SiteUser toDelete) {
-        return null;
+    public void delete(Long toDelete) {
+        userRepository.deleteById(toDelete);
     }
 
     @Override
-    public SiteUser findById(Long toFind) {
-        return null;
+    public Optional<SiteUser> findById(Long id) {
+        return userRepository.findById(id);
     }
 }
