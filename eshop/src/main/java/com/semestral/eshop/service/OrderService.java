@@ -2,6 +2,7 @@ package com.semestral.eshop.service;
 
 import com.semestral.eshop.domain.Order;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface OrderService {
@@ -9,4 +10,5 @@ public interface OrderService {
     Order update(Order toUpdate);
     void delete(Long toDelete);
     Optional<Order> findById(Long toFind );
+    List<Order> findAll();
 }

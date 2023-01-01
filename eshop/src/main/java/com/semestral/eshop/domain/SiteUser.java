@@ -22,7 +22,7 @@ public class SiteUser {
     @Column(nullable=false)
     private long credits;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "fromSiteUser")
     private List<Order> Orders;
 
     public SiteUser() {

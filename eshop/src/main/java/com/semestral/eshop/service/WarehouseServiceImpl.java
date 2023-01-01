@@ -5,6 +5,7 @@ import com.semestral.eshop.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,10 @@ public class WarehouseServiceImpl implements WarehouseService{
     @Override
     public Optional<Warehouse> findById(Long toFind) {
         return warehouseRepository.findById(toFind);
+    }
+
+    @Override
+    public List<Warehouse> findAll() {
+        return warehouseRepository.findAll();
     }
 }

@@ -2,6 +2,7 @@ package com.semestral.eshop.service;
 
 import com.semestral.eshop.domain.SiteUser;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
@@ -9,5 +10,6 @@ public interface UserService {
     SiteUser update(SiteUser toUpdate);
     void delete(Long toDelete);
     Optional<SiteUser> findById(Long toFind );
+    List<SiteUser> findAll();
 
 }

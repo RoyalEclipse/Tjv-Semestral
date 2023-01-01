@@ -18,6 +18,7 @@ public class Product {
     @Column(nullable=false)
     private int price;
     @ManyToOne
+//    @JoinColumn(name="order_id")
     private Order fromOrder;
 
     @ManyToMany
