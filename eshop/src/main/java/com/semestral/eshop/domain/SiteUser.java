@@ -1,34 +1,41 @@
 package com.semestral.eshop.domain;
 
-@Entity
-public class user {
-    private @id
-    @GeneratedValue Long id;
+import javax.persistence.*;
+import java.util.List;
 
-    @NotBlank
+@Entity
+public class SiteUser {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable=false)
     private String name;
-    @NotBlank
+    @Column(nullable=false)
     private String surname;
-    @NotBlank
+    @Column(nullable=false)
     private String email;
-    @NotBlank
+    @Column(nullable=false)
     private String phoneNumber;
-    @NotBlank
+    @Column(nullable=false)
     private int accessPrivileges;
-    @NotBlank
+    @Column(nullable=false)
     private long credits;
 
     @OneToMany(mappedBy = "user")
-    private List<order> orders;
+    private List<Order> Orders;
 
-    public user(String name, String surname, String email, String phoneNumber, int accessPrivileges, long credits, List<order> orders) {
+    public SiteUser() {
+    }
+
+    public SiteUser(String name, String surname, String email, String phoneNumber, int accessPrivileges, long credits, List<Order> Orders) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.accessPrivileges = accessPrivileges;
         this.credits = credits;
-        this.orders = orders;
+        this.Orders = Orders;
     }
 
     public Long getId() {
@@ -87,11 +94,11 @@ public class user {
         this.credits = credits;
     }
 
-    public List<order> getOrders() {
-        return orders;
+    public List<Order> getOrders() {
+        return Orders;
     }
 
-    public void setOrders(List<order> orders) {
-        this.orders = orders;
+    public void setOrders(List<Order> Orders) {
+        this.Orders = Orders;
     }
 }

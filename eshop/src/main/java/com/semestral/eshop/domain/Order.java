@@ -1,36 +1,43 @@
 package com.semestral.eshop.domain;
 
+import javax.persistence.*;
+import java.util.List;
+
 @Entity
-public class order {
-    private @id;
-    @GeneratedValue Long id;
-    @NotBlank
+public class Order {
+    @Id
+    @GeneratedValue
+    private Long id;
+    @Column(nullable=false)
     private String dateCreated;
-    @NotBlank
+    @Column(nullable=false)
     private String deliverTo;
-    @NotBlank
+    @Column(nullable=false)
     private int eta;
 
     @ManyToOne
-    private user fromUser;
+    private SiteUser fromSiteUser;
 
     @OneToMany(mappedBy = "order")
-    private List<product> products;
+    private List<Product> Products;
 
-    public order(String dateCreated, String deliverTo, int eta, user fromUser, List<product> products) {
+    public Order() {
+    }
+
+    public Order(String dateCreated, String deliverTo, int eta, SiteUser fromSiteUser, List<Product> Products) {
         this.dateCreated = dateCreated;
         this.deliverTo = deliverTo;
         this.eta = eta;
-        this.fromUser = fromUser;
-        this.products = products;
+        this.fromSiteUser = fromSiteUser;
+        this.Products = Products;
     }
 
-    public List<product> getProducts() {
-        return products;
+    public List<Product> getProducts() {
+        return Products;
     }
 
-    public void setProducts(List<product> products) {
-        this.products = products;
+    public void setProducts(List<Product> Products) {
+        this.Products = Products;
     }
 
     public Long getId() {
@@ -65,11 +72,11 @@ public class order {
         this.eta = eta;
     }
 
-    public user getFromUser() {
-        return fromUser;
+    public SiteUser getFromUser() {
+        return fromSiteUser;
     }
 
-    public void setFromUser(user fromUser) {
-        this.fromUser = fromUser;
+    public void setFromUser(SiteUser fromSiteUser) {
+        this.fromSiteUser = fromSiteUser;
     }
 }

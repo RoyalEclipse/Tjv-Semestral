@@ -1,18 +1,25 @@
 package com.semestral.eshop.domain;
 
+import javax.persistence.*;
+import java.util.Set;
+
 @Entity
-public class warehouse {
+public class Warehouse {
 
-    private @id;
-    @GeneratedValue Long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    @NotBlank
+    @Column(nullable=false)
     private String coordinates;
 
     @ManyToMany
-    private Set<product> availableProducts;
+    private Set<Product> availableProducts;
 
-    public warehouse(String coordinates, Set<product> availableProducts) {
+    public Warehouse() {
+    }
+
+    public Warehouse(String coordinates, Set<Product> availableProducts) {
         this.coordinates = coordinates;
         this.availableProducts = availableProducts;
     }
@@ -33,11 +40,11 @@ public class warehouse {
         this.coordinates = coordinates;
     }
 
-    public Set<product> getAvailableProducts() {
+    public Set<Product> getAvailableProducts() {
         return availableProducts;
     }
 
-    public void setAvailableProducts(Set<product> availableProducts) {
+    public void setAvailableProducts(Set<Product> availableProducts) {
         this.availableProducts = availableProducts;
     }
 }

@@ -1,41 +1,48 @@
 package com.semestral.eshop.domain;
 
-@Entity
-public class product {
-    private @id;
-    @GeneratedValue Long id;
+import javax.persistence.*;
+import java.util.Set;
 
-    @NotBlank
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @Column(nullable=false)
     private String name;
-    @NotBlank
+    @Column(nullable=false)
     private String description;
-    @NotBlank
+    @Column(nullable=false)
     private String imageUrl;
-    @NotBlank
+    @Column(nullable=false)
     private int price;
     @ManyToOne
-    private order fromOrder;
+    private Order fromOrder;
 
     @ManyToMany
-    private Set<warehouse> availableAt;
+    private Set<Warehouse> availableAt;
 
-    public order getFromOrder() {
+    public Product() {
+    }
+
+    public Order getFromOrder() {
         return fromOrder;
     }
 
-    public void setFromOrder(order fromOrder) {
+    public void setFromOrder(Order fromOrder) {
         this.fromOrder = fromOrder;
     }
 
-    public Set<warehouse> getAvailableAt() {
+    public Set<Warehouse> getAvailableAt() {
         return availableAt;
     }
 
-    public void setAvailableAt(Set<warehouse> availableAt) {
+    public void setAvailableAt(Set<Warehouse> availableAt) {
         this.availableAt = availableAt;
     }
 
-    public product(String name, String description, String imageUrl, int price, order fromOrder, Set<warehouse> availableAt) {
+    public Product(String name, String description, String imageUrl, int price, Order fromOrder, Set<Warehouse> availableAt) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
