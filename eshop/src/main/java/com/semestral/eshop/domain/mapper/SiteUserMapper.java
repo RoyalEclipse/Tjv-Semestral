@@ -2,9 +2,11 @@ package com.semestral.eshop.domain.mapper;
 
 import com.semestral.eshop.domain.SiteUser;
 import com.semestral.eshop.domain.dto.SiteUserDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SiteUserMapper {
-    SiteUserDto toDto(SiteUser siteUser){
+    public SiteUserDto toDto(SiteUser siteUser){
         SiteUserDto temp = new SiteUserDto();
         temp.setCredits(siteUser.getCredits());
         temp.setEmail(siteUser.getEmail());
@@ -16,7 +18,7 @@ public class SiteUserMapper {
         temp.setSiteOrders(siteUser.getOrders());
         return temp;
     }
-    SiteUser fromDto(SiteUserDto SiteUserDto){
+    public SiteUser fromDto(SiteUserDto SiteUserDto){
         SiteUser temp = new SiteUser();
         temp.setCredits(SiteUserDto.getCredits());
         temp.setEmail(SiteUserDto.getEmail());

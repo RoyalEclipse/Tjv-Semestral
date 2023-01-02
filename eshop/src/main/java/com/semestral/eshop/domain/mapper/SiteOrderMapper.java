@@ -2,9 +2,12 @@ package com.semestral.eshop.domain.mapper;
 
 import com.semestral.eshop.domain.SiteOrder;
 import com.semestral.eshop.domain.dto.SiteOrderDto;
+import org.springframework.stereotype.Component;
+
+@Component
 
 public class SiteOrderMapper {
-    SiteOrderDto toDto(SiteOrder siteOrder){
+    public SiteOrderDto toDto(SiteOrder siteOrder){
         SiteOrderDto temp = new SiteOrderDto();
         temp.setEta(siteOrder.getEta());
         temp.setDateCreated(siteOrder.getDateCreated());
@@ -14,7 +17,7 @@ public class SiteOrderMapper {
         temp.setFromSiteUser(siteOrder.getFromUser());
         return temp;
     }
-    SiteOrder fromDto(SiteOrderDto siteOrderDto){
+    public SiteOrder fromDto(SiteOrderDto siteOrderDto){
         SiteOrder temp = new SiteOrder();
         temp.setEta(siteOrderDto.getEta());
         temp.setDateCreated(siteOrderDto.getDateCreated());

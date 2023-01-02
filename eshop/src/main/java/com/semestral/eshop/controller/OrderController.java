@@ -1,6 +1,9 @@
 package com.semestral.eshop.controller;
 
 import com.semestral.eshop.domain.SiteOrder;
+import com.semestral.eshop.domain.dto.SiteOrderDto;
+import com.semestral.eshop.domain.dto.SiteOrderRequest;
+import com.semestral.eshop.domain.mapper.SiteOrderMapper;
 import com.semestral.eshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,40 +11,47 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/order")
 public class OrderController {
     private final OrderService orderService;
+    private final SiteOrderMapper siteOrderMapper;
     @Autowired
-    public OrderController(OrderService orderService) {
+    public OrderController(OrderService orderService, SiteOrderMapper siteOrderMapper) {
         this.orderService = orderService;
+        this.siteOrderMapper = siteOrderMapper;
     }
 
     @GetMapping
-    public List<SiteOrder> getAll(){
-        return orderService.findAll();
+    public List<SiteOrderDto> getAll(){
+        List<SiteOrder> temp = orderService.findAll();
+        return temp.stream().map(siteOrderMapper::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SiteOrder> getById(@PathVariable Long id){
+    public ResponseEntity<SiteOrderDto> getById(@PathVariable Long id){
         Optional<SiteOrder> temp = orderService.findById(id);
-        return temp.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<SiteOrderDto> toRet = Optional.ofNullable( siteOrderMapper.toDto( temp.get() ) );
+        return toRet.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public SiteOrder create( @RequestBody SiteOrder toCreate) {
-        return orderService.create(toCreate);
+    public SiteOrderDto create( @RequestBody SiteOrderRequest request) {
+        SiteOrder temp = orderService.create(request);
+        return siteOrderMapper.toDto( temp );
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SiteOrder> update(@PathVariable Long id, @RequestBody SiteOrder toUpdate){
+    public ResponseEntity<SiteOrderDto> update(@PathVariable Long id, @RequestBody SiteOrderDto toUpdate){
         Optional<SiteOrder> temp = orderService.findById(id);
         if( temp.isEmpty() ){
             return ResponseEntity.notFound().build();
         }
         toUpdate.setId(id);
-        return ResponseEntity.ok( orderService.update(toUpdate) );
+        SiteOrder toRet = orderService.update( siteOrderMapper.fromDto( toUpdate) );
+        return ResponseEntity.ok( siteOrderMapper.toDto(toRet)  );
     }
 
     @DeleteMapping("/{id}")
@@ -52,6 +62,6 @@ public class OrderController {
             return ResponseEntity.notFound().build();
         }
         orderService.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

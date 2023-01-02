@@ -2,9 +2,11 @@ package com.semestral.eshop.domain.mapper;
 
 import com.semestral.eshop.domain.Product;
 import com.semestral.eshop.domain.dto.ProductDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductMapper {
-    ProductDto toDto(Product product){
+    public ProductDto toDto(Product product){
         ProductDto temp = new ProductDto();
         temp.setDescription(product.getDescription());
         temp.setId(product.getId());
@@ -15,7 +17,7 @@ public class ProductMapper {
         temp.setFromSiteOrder(product.getFromOrder());
         return temp;
     }
-    Product fromDto(ProductDto productDto){
+    public Product fromDto(ProductDto productDto){
         Product temp = new Product();
         temp.setDescription(productDto.getDescription());
         temp.setId(productDto.getId());
