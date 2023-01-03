@@ -1,9 +1,8 @@
 package com.semestral.eshop.domain.dto;
 
 import com.semestral.eshop.domain.SiteOrder;
-import com.semestral.eshop.domain.Warehouse;
 
-import java.util.Set;
+import java.util.List;
 
 public class ProductDto {
     private Long id;
@@ -12,7 +11,7 @@ public class ProductDto {
     private String imageUrl;
     private int price;
     private SiteOrder fromSiteOrder;
-    private Set<Warehouse> availableAt;
+    private List<Long> availableAt;
 
     public Long getId() {
         return id;
@@ -62,11 +61,11 @@ public class ProductDto {
         this.fromSiteOrder = fromSiteOrder;
     }
 
-    public Set<Warehouse> getAvailableAt() {
+    public List<Long> getAvailableAt() {
         return availableAt;
     }
 
-    public void setAvailableAt(Set<Warehouse> availableAt) {
+    public void setAvailableAt(List<Long> availableAt) {
         this.availableAt = availableAt;
     }
 }

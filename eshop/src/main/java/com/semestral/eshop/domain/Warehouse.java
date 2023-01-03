@@ -1,7 +1,7 @@
 package com.semestral.eshop.domain;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Warehouse {
@@ -14,12 +14,12 @@ public class Warehouse {
     private String coordinates;
 
     @ManyToMany
-    private Set<Product> availableProducts;
+    private List<Product> availableProducts;
 
     public Warehouse() {
     }
 
-    public Warehouse(String coordinates, Set<Product> availableProducts) {
+    public Warehouse(String coordinates, List<Product> availableProducts) {
         this.coordinates = coordinates;
         this.availableProducts = availableProducts;
     }
@@ -40,11 +40,11 @@ public class Warehouse {
         this.coordinates = coordinates;
     }
 
-    public Set<Product> getAvailableProducts() {
+    public List<Product> getAvailableProducts() {
         return availableProducts;
     }
 
-    public void setAvailableProducts(Set<Product> availableProducts) {
+    public void setAvailableProducts(List<Product> availableProducts) {
         this.availableProducts = availableProducts;
     }
 }

@@ -1,8 +1,5 @@
 package com.semestral.eshop.domain.dto;
 
-import com.semestral.eshop.domain.Product;
-import com.semestral.eshop.domain.SiteUser;
-
 import java.util.List;
 
 public class SiteOrderDto {
@@ -10,8 +7,8 @@ public class SiteOrderDto {
     private String dateCreated;
     private String deliverTo;
     private int eta;
-    private SiteUser fromSiteUser;
-    private List<Product> Products;
+    private Long fromSiteUser;
+    private List<Long> Products;
 
     public Long getId() {
         return id;
@@ -45,19 +42,19 @@ public class SiteOrderDto {
         this.eta = eta;
     }
 
-    public SiteUser getFromSiteUser() {
+    public Long getFromSiteUser() {
         return fromSiteUser;
     }
 
-    public void setFromSiteUser(SiteUser fromSiteUser) {
+    public void setFromSiteUser(Long fromSiteUser) {
         this.fromSiteUser = fromSiteUser;
     }
 
-    public List<Product> getProducts() {
+    public List<Long> getProducts() {
         return Products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<Long> products) {
         Products = products;
     }
 }

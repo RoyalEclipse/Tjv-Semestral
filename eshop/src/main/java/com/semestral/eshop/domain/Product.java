@@ -1,7 +1,7 @@
 package com.semestral.eshop.domain;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -21,7 +21,7 @@ public class Product {
     private SiteOrder fromSiteOrder;
 
     @ManyToMany
-    private Set<Warehouse> availableAt;
+    private List<Warehouse> availableAt;
 
     public Product() {
     }
@@ -34,15 +34,15 @@ public class Product {
         this.fromSiteOrder = fromSiteOrder;
     }
 
-    public Set<Warehouse> getAvailableAt() {
+    public List<Warehouse> getAvailableAt() {
         return availableAt;
     }
 
-    public void setAvailableAt(Set<Warehouse> availableAt) {
+    public void setAvailableAt(List<Warehouse> availableAt) {
         this.availableAt = availableAt;
     }
 
-    public Product(String name, String description, String imageUrl, int price, SiteOrder fromSiteOrder, Set<Warehouse> availableAt) {
+    public Product(String name, String description, String imageUrl, int price, SiteOrder fromSiteOrder, List<Warehouse> availableAt) {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;

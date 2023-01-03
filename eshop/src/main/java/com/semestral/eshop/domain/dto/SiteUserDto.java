@@ -1,7 +1,5 @@
 package com.semestral.eshop.domain.dto;
 
-import com.semestral.eshop.domain.SiteOrder;
-
 import java.util.List;
 
 public class SiteUserDto {
@@ -12,7 +10,7 @@ public class SiteUserDto {
     private String phoneNumber;
     private int accessPrivileges;
     private long credits;
-    private List<SiteOrder> SiteOrders;
+    private List<Long> SiteOrders;
 
     public Long getId() {
         return id;
@@ -70,11 +68,11 @@ public class SiteUserDto {
         this.credits = credits;
     }
 
-    public List<SiteOrder> getSiteOrders() {
+    public List<Long> getSiteOrders() {
         return SiteOrders;
     }
 
-    public void setSiteOrders(List<SiteOrder> siteOrders) {
+    public void setSiteOrders(List<Long> siteOrders) {
         SiteOrders = siteOrders;
     }
 }

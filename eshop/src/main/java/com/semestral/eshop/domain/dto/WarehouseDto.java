@@ -1,13 +1,11 @@
 package com.semestral.eshop.domain.dto;
 
-import com.semestral.eshop.domain.Product;
-
-import java.util.Set;
+import java.util.List;
 
 public class WarehouseDto {
     private Long id;
     private String coordinates;
-    private Set<Product> availableProducts;
+    private List<Long> availableProducts;
 
     public Long getId() {
         return id;
@@ -25,11 +23,11 @@ public class WarehouseDto {
         this.coordinates = coordinates;
     }
 
-    public Set<Product> getAvailableProducts() {
+    public List<Long> getAvailableProducts() {
         return availableProducts;
     }
 
-    public void setAvailableProducts(Set<Product> availableProducts) {
+    public void setAvailableProducts(List<Long> availableProducts) {
         this.availableProducts = availableProducts;
     }
 }

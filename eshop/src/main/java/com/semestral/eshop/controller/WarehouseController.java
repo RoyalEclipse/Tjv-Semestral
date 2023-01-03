@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -37,10 +38,15 @@ public class WarehouseController {
     }
 
     @PostMapping
-    public WarehouseDto create( @RequestBody WarehouseDto toCreate) {
-        Warehouse temp = warehouseMapper.fromDto( toCreate );
-        temp = warehouseService.create(temp);
-        return warehouseMapper.toDto(temp);
+    public ResponseEntity<WarehouseDto> create( @RequestBody WarehouseDto toCreate) {
+        try {
+            Warehouse temp = warehouseMapper.fromDto( toCreate );
+            temp = warehouseService.create(temp);
+            return ResponseEntity.ok( warehouseMapper.toDto(temp) );
+        }
+        catch ( NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{id}")

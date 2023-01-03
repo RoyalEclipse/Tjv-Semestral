@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -32,8 +33,8 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<SiteUserDto> getById( @PathVariable Long id){
         Optional<SiteUser> temp = userService.findById(id);
-        Optional<SiteUserDto> test = Optional.ofNullable(siteUserMapper.toDto(temp.get()));
-        return test.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<SiteUserDto> foo = Optional.ofNullable(siteUserMapper.toDto(temp.get()));
+        return foo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -49,8 +50,12 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         user.setId(id);
-        SiteUser toRet = userService.update( siteUserMapper.fromDto(user) );
-        return ResponseEntity.ok( siteUserMapper.toDto(toRet) );
+        try{
+            SiteUser toRet = userService.update( siteUserMapper.fromDto(user) );
+            return ResponseEntity.ok( siteUserMapper.toDto(toRet) );
+        }catch ( NoSuchElementException e){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")

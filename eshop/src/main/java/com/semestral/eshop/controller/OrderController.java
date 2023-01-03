@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -50,8 +51,12 @@ public class OrderController {
             return ResponseEntity.notFound().build();
         }
         toUpdate.setId(id);
-        SiteOrder toRet = orderService.update( siteOrderMapper.fromDto( toUpdate) );
-        return ResponseEntity.ok( siteOrderMapper.toDto(toRet)  );
+        try {
+            SiteOrder toRet = orderService.update(siteOrderMapper.fromDto(toUpdate));
+            return ResponseEntity.ok( siteOrderMapper.toDto(toRet)  );
+        }catch (NoSuchElementException e ){
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
