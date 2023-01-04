@@ -38,9 +38,16 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDto create( @RequestBody Product toCreate) {
-        Product temp = productService.create(toCreate);
-        return productMapper.toDto(temp);
+    public ResponseEntity<ProductDto> create( @RequestBody ProductDto toCreate) {
+        try{
+
+            Product temp = productMapper.fromDto(toCreate);
+            Product toRet = productService.create(temp);
+            return ResponseEntity.ok( productMapper.toDto(toRet) );
+        }catch ( NoSuchElementException e ){
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @PutMapping("/{id}")

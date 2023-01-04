@@ -1,8 +1,10 @@
 package com.semestral.eshop.domain.mapper;
 
 import com.semestral.eshop.domain.Product;
+import com.semestral.eshop.domain.SiteOrder;
 import com.semestral.eshop.domain.Warehouse;
 import com.semestral.eshop.domain.dto.ProductDto;
+import com.semestral.eshop.repository.OrderRepository;
 import com.semestral.eshop.repository.WarehouseRepository;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +16,12 @@ import java.util.Optional;
 @Component
 public class ProductMapper {
     private final WarehouseRepository warehouseRepository;
+    private final OrderRepository orderRepository;
 
-    public ProductMapper(WarehouseRepository warehouseRepository) {
+    public ProductMapper(WarehouseRepository warehouseRepository,
+                         OrderRepository orderRepository) {
         this.warehouseRepository = warehouseRepository;
+        this.orderRepository = orderRepository;
     }
 
     public ProductDto toDto(Product product){
@@ -33,7 +38,12 @@ public class ProductMapper {
 
         temp.setPrice(product.getPrice());
         temp.setImageUrl(product.getImageUrl());
-        temp.setFromSiteOrder(product.getFromOrder());
+
+        if( product.getFromOrder() != null )
+            temp.setFromSiteOrder(product.getFromOrder().getId());
+        else
+            temp.setFromSiteOrder(null);
+
         return temp;
     }
     public Product fromDto(ProductDto productDto){
@@ -56,7 +66,17 @@ public class ProductMapper {
         temp.setAvailableAt(availableAtWar);
         temp.setPrice(productDto.getPrice());
         temp.setImageUrl(productDto.getImageUrl());
-        temp.setFromOrder(productDto.getFromSiteOrder());
+
+        if( productDto.getFromSiteOrder() != null ) {
+            Optional<SiteOrder> foundProduct = orderRepository.findById(productDto.getFromSiteOrder());
+            if (foundProduct.isPresent()) {
+                temp.setFromOrder(foundProduct.get());
+            } else {
+                throw new NoSuchElementException("No such order found.");
+            }
+        }
+        else temp.setFromOrder(null);
+
         return temp;
     }
 }

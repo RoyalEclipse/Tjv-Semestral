@@ -9,4 +9,7 @@ public interface WarehouseRepositoryCustom {
     Warehouse calculateFurthest(String deliverTo, List<Product> toDeliver );
     int calculateTravelDistance(String deliverTo, String deliverFrom);
 
+    Warehouse findNearest(String deliverTo, Product toDeliver );
+
+
 }

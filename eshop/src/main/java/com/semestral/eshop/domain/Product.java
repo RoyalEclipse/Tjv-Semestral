@@ -21,6 +21,9 @@ public class Product {
     private SiteOrder fromSiteOrder;
 
     @ManyToMany
+    @JoinTable(name = "product_warehouse",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "warehouse_id"))
     private List<Warehouse> availableAt;
 
     public Product() {

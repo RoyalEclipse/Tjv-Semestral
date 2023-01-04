@@ -6,10 +6,7 @@ import com.semestral.eshop.domain.SiteUser;
 import com.semestral.eshop.domain.Warehouse;
 import com.semestral.eshop.domain.dto.SiteOrderRequest;
 import com.semestral.eshop.exception.InsufficientCreditsException;
-import com.semestral.eshop.repository.OrderRepository;
-import com.semestral.eshop.repository.ProductRepository;
-import com.semestral.eshop.repository.UserRepository;
-import com.semestral.eshop.repository.WarehouseRepositoryCustom;
+import com.semestral.eshop.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,17 +21,19 @@ public class OrderServiceImpl implements OrderService{
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final WarehouseRepositoryCustom warehouseRepositoryCustom;
+    private final WarehouseRepository warehouseRepository;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository,
                             UserRepository userRepository,
                             ProductRepository productRepository,
-                            WarehouseRepositoryCustom warehouseRepositoryCustom
-                            ) {
+                            WarehouseRepositoryCustom warehouseRepositoryCustom,
+                            WarehouseRepository warehouseRepository) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.warehouseRepositoryCustom = warehouseRepositoryCustom;
+        this.warehouseRepository = warehouseRepository;
     }
     @Override
     public SiteOrder create(SiteOrderRequest toAdd) {
@@ -47,6 +46,16 @@ public class OrderServiceImpl implements OrderService{
         if( priceTotal > targetUser.getCredits() ) {
             throw new InsufficientCreditsException("Not enough credits");
         }
+
+//        todo make this actually work
+        for( Product product : products ){
+            Warehouse temp = warehouseRepositoryCustom.findNearest( toAdd.getDeliverTo(), product );
+            temp.getAvailableProducts().remove(product);
+            warehouseRepository.save(temp);
+        }
+
+        targetUser.setCredits( targetUser.getCredits() - priceTotal);
+        userRepository.save(targetUser);
 
         SiteOrder toSave = new SiteOrder();
         toSave.setFromUser(targetUser);

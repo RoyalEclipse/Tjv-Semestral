@@ -10,7 +10,7 @@ public class SiteUserDto {
     private String phoneNumber;
     private int accessPrivileges;
     private long credits;
-    private List<Long> SiteOrders;
+    private List<Long> siteOrders;
 
     public Long getId() {
         return id;
@@ -69,10 +69,10 @@ public class SiteUserDto {
     }
 
     public List<Long> getSiteOrders() {
-        return SiteOrders;
+        return siteOrders;
     }
 
     public void setSiteOrders(List<Long> siteOrders) {
-        SiteOrders = siteOrders;
+        this.siteOrders = siteOrders;
     }
 }

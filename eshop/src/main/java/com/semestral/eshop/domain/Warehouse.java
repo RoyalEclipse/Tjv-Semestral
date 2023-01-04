@@ -13,7 +13,7 @@ public class Warehouse {
     @Column(nullable=false)
     private String coordinates;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "availableAt")
     private List<Product> availableProducts;
 
     public Warehouse() {

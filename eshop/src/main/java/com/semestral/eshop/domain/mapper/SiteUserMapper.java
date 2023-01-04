@@ -30,9 +30,12 @@ public class SiteUserMapper {
         temp.setPhoneNumber(siteUser.getPhoneNumber());
 
         List<Long> foundIds = new ArrayList<>();
-        for(SiteOrder order : siteUser.getOrders()){
-            foundIds.add(order.getId());
+        if( siteUser.getOrders() != null && ! siteUser.getOrders().isEmpty()){
+            for(SiteOrder order : siteUser.getOrders()){
+                foundIds.add(order.getId());
+            }
         }
+
         temp.setSiteOrders(foundIds);
 
         return temp;
@@ -48,13 +51,15 @@ public class SiteUserMapper {
         temp.setPhoneNumber(siteUserDto.getPhoneNumber());
 
         List<SiteOrder> foundOrders = new ArrayList<>();
-        for( Long id : siteUserDto.getSiteOrders()){
-            Optional<SiteOrder> found = orderRepository.findById(id);
-            if (found.isPresent()){
-                foundOrders.add(found.get());
-            }
-            else{
-                throw new NoSuchElementException("no such order found");
+        if( siteUserDto.getSiteOrders().isEmpty()){
+            for( Long id : siteUserDto.getSiteOrders()){
+                Optional<SiteOrder> found = orderRepository.findById(id);
+                if (found.isPresent()){
+                    foundOrders.add(found.get());
+                }
+                else{
+                    throw new NoSuchElementException("no such order found");
+                }
             }
         }
 

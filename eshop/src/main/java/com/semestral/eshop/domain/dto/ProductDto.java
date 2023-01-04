@@ -1,7 +1,5 @@
 package com.semestral.eshop.domain.dto;
 
-import com.semestral.eshop.domain.SiteOrder;
-
 import java.util.List;
 
 public class ProductDto {
@@ -10,7 +8,7 @@ public class ProductDto {
     private String description;
     private String imageUrl;
     private int price;
-    private SiteOrder fromSiteOrder;
+    private Long fromSiteOrder;
     private List<Long> availableAt;
 
     public Long getId() {
@@ -53,11 +51,11 @@ public class ProductDto {
         this.price = price;
     }
 
-    public SiteOrder getFromSiteOrder() {
+    public Long getFromSiteOrder() {
         return fromSiteOrder;
     }
 
-    public void setFromSiteOrder(SiteOrder fromSiteOrder) {
+    public void setFromSiteOrder(Long fromSiteOrder) {
         this.fromSiteOrder = fromSiteOrder;
     }
 
