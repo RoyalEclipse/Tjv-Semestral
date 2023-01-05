@@ -22,13 +22,16 @@ public class SiteUser {
     @Column(nullable=false)
     private long credits;
 
+    @Column(nullable=false)
+    private String password;
+
     @OneToMany(mappedBy = "fromSiteUser")
     private List<SiteOrder> SiteOrders;
 
     public SiteUser() {
     }
 
-    public SiteUser(String name, String surname, String email, String phoneNumber, int accessPrivileges, long credits, List<SiteOrder> SiteOrders) {
+    public SiteUser(String name, String surname, String email, String phoneNumber, int accessPrivileges, long credits, List<SiteOrder> SiteOrders, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -36,6 +39,15 @@ public class SiteUser {
         this.accessPrivileges = accessPrivileges;
         this.credits = credits;
         this.SiteOrders = SiteOrders;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {

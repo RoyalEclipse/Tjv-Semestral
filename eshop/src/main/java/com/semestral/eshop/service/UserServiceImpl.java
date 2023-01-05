@@ -42,4 +42,9 @@ public class UserServiceImpl implements UserService {
     public List<SiteUser> findAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public Optional<SiteUser> findByPasswordAndEmail( String password, String email ){
+        return userRepository.findByPasswordAndEmail(password,email);
+    }
 }

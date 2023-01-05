@@ -12,4 +12,7 @@ public interface UserService {
     Optional<SiteUser> findById(Long toFind );
     List<SiteUser> findAll();
 
+    Optional<SiteUser> findByPasswordAndEmail( String password, String email );
+
+
 }

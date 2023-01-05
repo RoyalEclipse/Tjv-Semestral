@@ -47,13 +47,6 @@ public class OrderServiceImpl implements OrderService{
             throw new InsufficientCreditsException("Not enough credits");
         }
 
-//        todo make this actually work
-        for( Product product : products ){
-            Warehouse temp = warehouseRepositoryCustom.findNearest( toAdd.getDeliverTo(), product );
-            temp.getAvailableProducts().remove(product);
-            warehouseRepository.save(temp);
-        }
-
         targetUser.setCredits( targetUser.getCredits() - priceTotal);
         userRepository.save(targetUser);
 

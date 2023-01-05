@@ -28,6 +28,7 @@ public class SiteUserMapper {
         temp.setSurname(siteUser.getSurname());
         temp.setAccessPrivileges(siteUser.getAccessPrivileges());
         temp.setPhoneNumber(siteUser.getPhoneNumber());
+        temp.setPassword(siteUser.getPassword());
 
         List<Long> foundIds = new ArrayList<>();
         if( siteUser.getOrders() != null && ! siteUser.getOrders().isEmpty()){
@@ -49,6 +50,7 @@ public class SiteUserMapper {
         temp.setSurname(siteUserDto.getSurname());
         temp.setAccessPrivileges(siteUserDto.getAccessPrivileges());
         temp.setPhoneNumber(siteUserDto.getPhoneNumber());
+        temp.setPassword(siteUserDto.getPassword());
 
         List<SiteOrder> foundOrders = new ArrayList<>();
         if( siteUserDto.getSiteOrders().isEmpty()){

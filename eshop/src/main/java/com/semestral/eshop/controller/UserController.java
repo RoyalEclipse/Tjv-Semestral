@@ -46,6 +46,18 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{email}/{password}")
+    @ApiOperation(value="get userId for login")
+    public ResponseEntity<Long> getByNameNumber(@PathVariable String email, @PathVariable String password){
+        Optional<SiteUser> temp = userService.findByPasswordAndEmail(password, email);
+        try {
+            Optional<SiteUserDto> foo = Optional.ofNullable(siteUserMapper.toDto(temp.get()));
+            return ResponseEntity.ok( foo.get().getId() );
+        }catch ( NoSuchElementException e ){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     @ApiOperation(value = "create a new user")
     public SiteUserDto create( @RequestBody SiteUser user) {
