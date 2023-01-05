@@ -4,6 +4,8 @@ import com.semestral.eshop.domain.Product;
 import com.semestral.eshop.domain.dto.ProductDto;
 import com.semestral.eshop.domain.mapper.ProductMapper;
 import com.semestral.eshop.service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/product")
+@Api
 public class ProductController {
     private final ProductService productService;
     private final ProductMapper productMapper;
@@ -25,12 +28,14 @@ public class ProductController {
     }
 
     @GetMapping
+    @ApiOperation(value = "get all Products")
     public List<ProductDto> getAll(){
         List<Product> temp = productService.findAll();
         return temp.stream().map(productMapper::toDto).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "get a specific product by id")
     public ResponseEntity<ProductDto> getById(@PathVariable Long id){
         Optional<Product> temp = productService.findById(id);
         Optional<ProductDto> toRet = Optional.ofNullable(productMapper.toDto(temp.get()));
@@ -38,6 +43,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @ApiOperation(value = "create a new product")
     public ResponseEntity<ProductDto> create( @RequestBody ProductDto toCreate) {
         try{
 
@@ -51,6 +57,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "update an existing product")
     public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto toUpdate){
         Optional<Product> temp = productService.findById(id);
         if( temp.isEmpty() ){
@@ -68,6 +75,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "delete an existing product")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         Optional<Product> temp = productService.findById(id);
 
