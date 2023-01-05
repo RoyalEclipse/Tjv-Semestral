@@ -18,7 +18,7 @@ Při tvorbě objednávky bych chtěl implementovat aby server odhadnul čas doru
 
 ## Instukce ke spuštění a pro kontrolující
 
-### databáze
+### Databáze
 Databázi doporučuji spustit přes docker,
 pro spuštění přes dockerfile:
     1) sudo docker build -t semestral .
@@ -39,7 +39,7 @@ S trochou štěstí se spustí perfektně, na první pokus a bez toho aby jste m
 
 Business operace je v souborech pro SiteOrder, potom co přijde post request obsahující `SiteOrderRequest` tak se přesune do siteOrderService, kde je poté zpracován. Kontroluje se stav kreditů uživatele a tak podobně.
 
-Ve WarehouseRepositoryCustomImpl se poté nachází operace s databází pro získání skladů a vypočítání doby doručení.
+Ve WarehouseRepositoryCustomImpl se poté nachází dotaz navíc pro získání skladů pro vypočítání doby doručení.
 
 ## Dokumentace
 Dokumentace je vytvořená přes springfox se swagger-ui, po spuštění je dostupná na `http://localhost:6060/swagger-ui.html`.
